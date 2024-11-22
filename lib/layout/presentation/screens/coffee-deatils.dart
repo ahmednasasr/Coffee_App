@@ -1,3 +1,4 @@
+import 'package:coffeeshopapp/layout/presentation/screens/order_coffee_screen.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeDetailsScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  icon: const Icon(Icons.arrow_back, size: 28),
+                  icon: const Icon(Icons.arrow_back_ios, size: 28),
                 ),
                 const Text(
                   'Detail',
@@ -130,7 +131,9 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
                       fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OrderCoffeeScreen(image: widget.image),));
+                  },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),
                   child:
                   const Text('Buy Now', style: TextStyle(color: Colors.white)),
