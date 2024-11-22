@@ -1,6 +1,7 @@
 import 'package:coffeeshopapp/layout/presentation/manger/layout_provider.dart';
 import 'package:coffeeshopapp/layout/presentation/screens/coffee-deatils.dart';
 import 'package:coffeeshopapp/layout/presentation/screens/home_screen.dart';
+import 'package:coffeeshopapp/layout/presentation/screens/order_coffee_screen.dart';
 import 'package:coffeeshopapp/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       routes: {
         HomeScreen.routename: (context) => const HomeScreen(),
         LayoutScreen.routename: (context) => const LayoutScreen(),
+        OrderCoffeeScreen.routename: (context) =>  OrderCoffeeScreen(image: "",),
         CoffeeDetailsScreen.routename: (context) => CoffeeDetailsScreen(
           name: '',
           description: '',
