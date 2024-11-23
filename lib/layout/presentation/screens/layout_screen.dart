@@ -34,6 +34,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
 
         selectedItemColor: Color(0xffC67C4E),
         unselectedItemColor: Colors.black,
+        backgroundColor: Color(0xffC67C4E),
       ),
       body: provider.screens[provider.selectedIndex],
     );

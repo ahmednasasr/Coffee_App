@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 14),
             ),
             Text(
-              'Bilzen, Tanjungbalai',
+              'Sahrkia, Minia-Elqamh',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,

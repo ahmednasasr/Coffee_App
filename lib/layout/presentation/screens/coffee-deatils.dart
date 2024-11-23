@@ -134,7 +134,7 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => OrderCoffeeScreen(image: widget.image),));
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),
+                  style: ElevatedButton.styleFrom(backgroundColor: Color(0xffC67C4E)),
                   child:
                   const Text('Buy Now', style: TextStyle(color: Colors.white)),
                 ),
@@ -156,7 +156,7 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         decoration: BoxDecoration(
-          color: _selectedSize == size ? Colors.brown : Colors.transparent,
+          color: _selectedSize == size ? Color(0xffC67C4E) : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: Colors.brown, width: 1),
         ),

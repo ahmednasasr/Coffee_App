@@ -11,6 +11,10 @@ class OrderCoffeeScreen extends StatefulWidget {
 }
 
 class _OrderCoffeeScreenState extends State<OrderCoffeeScreen> {
+  bool isPickupSelected = false;
+  int coffeeCount = 1;
+  String? userNote;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +49,15 @@ class _OrderCoffeeScreenState extends State<OrderCoffeeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        isPickupSelected = false;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFD2691E),
+                      backgroundColor: isPickupSelected
+                          ? Colors.grey
+                          : const Color(0xFFD2691E),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -56,14 +66,29 @@ class _OrderCoffeeScreenState extends State<OrderCoffeeScreen> {
                   ),
                   const SizedBox(width: 10),
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        isPickupSelected = true;
+                      });
+                    },
                     style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.grey),
+                      backgroundColor: isPickupSelected
+                          ? const Color(0xFFD2691E)
+                          : Colors.transparent,
+                      side: BorderSide(
+                        color:
+                            isPickupSelected ? Colors.transparent : Colors.grey,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    child: const Text("Pick Up"),
+                    child: Text(
+                      "Pick Up",
+                      style: TextStyle(
+                        color: isPickupSelected ? Colors.white : Colors.black,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -74,7 +99,7 @@ class _OrderCoffeeScreenState extends State<OrderCoffeeScreen> {
               ),
               const SizedBox(height: 10),
               const Text(
-                "Jl. Kpg Sutoyo",
+                "Sahrkia, Minia-Elqamh",
                 style: TextStyle(fontSize: 14),
               ),
               const Text(
@@ -91,9 +116,16 @@ class _OrderCoffeeScreenState extends State<OrderCoffeeScreen> {
                   ),
                   const SizedBox(width: 10),
                   OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      _showAddNoteModal(context);
+                    },
                     icon: const Icon(Icons.note_add, size: 16),
-                    label: const Text("Add Note"),
+                    label: Text(
+                      userNote == null ? "Add Note" : "Add Note +1",
+                      style: TextStyle(
+                        color: userNote == null ? Colors.black : Colors.orange,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -124,12 +156,20 @@ class _OrderCoffeeScreenState extends State<OrderCoffeeScreen> {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            if (coffeeCount > 1) coffeeCount--;
+                          });
+                        },
                         icon: const Icon(Icons.remove),
                       ),
-                      const Text("1"),
+                      Text("$coffeeCount"),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            coffeeCount++;
+                          });
+                        },
                         icon: const Icon(Icons.add),
                       ),
                     ],
@@ -208,11 +248,55 @@ class _OrderCoffeeScreenState extends State<OrderCoffeeScreen> {
                   child: const Text("Order"),
                 ),
               ),
-
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void _showAddNoteModal(BuildContext context) {
+    TextEditingController noteController = TextEditingController();
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+            top: 16.0,
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: noteController,
+                decoration: const InputDecoration(
+                  labelText: "Add Note",
+                  border: OutlineInputBorder(),
+                ),
+                maxLines: 3,
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    userNote = noteController.text;
+                  });
+                  Navigator.pop(context);
+                },
+                child: const Text("Save"),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
